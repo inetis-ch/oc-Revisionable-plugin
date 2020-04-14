@@ -28,7 +28,7 @@
         </thead>
         <?php if ($revisions->isEmpty()): ?>
         <tr>
-            <td colspan="4"><p class="no-data"><?= e(trans('inetis.revisionable::lang.list.no_records')) ?></p></td>
+            <td colspan="5"><p class="no-data"><?= e(trans('inetis.revisionable::lang.list.no_records')) ?></p></td>
         </tr>
         <?php endif; ?>
         <?php foreach ($revisions as $revisionsGroup) : ?>
