@@ -1,0 +1,50 @@
+<?php Block::put('breadcrumb') ?>
+<ul>
+    <li><a href="<?= $url['list']; ?>"><?= $modelName ?></a></li>
+    <li><?= e($this->pageTitle) ?></li>
+</ul>
+<?php Block::endPut() ?>
+
+<div class="toolbar-widget list-header">
+    <div class="control-toolbar">
+        <a href="<?= $url['preview']; ?>" class="btn btn-default oc-icon-chevron-left">
+            <?= e(trans('inetis.revisionable::lang.btn_back')) ?>
+        </a>
+    </div>
+</div>
+
+<div class="control-list">
+    <table class="table data">
+        <thead>
+        <tr>
+            <th width="200">
+                <span><?= e(trans('inetis.revisionable::lang.list.date')) ?></span>
+            </th>
+            <th><span><?= e(trans('inetis.revisionable::lang.list.field')) ?></span></th>
+            <th><span><?= e(trans('inetis.revisionable::lang.list.old_value')) ?></span></th>
+            <th><span><?= e(trans('inetis.revisionable::lang.list.new_value')) ?></span></th>
+            <th><span><?= e(trans('inetis.revisionable::lang.list.user')) ?></span></th>
+        </tr>
+        </thead>
+        <?php if ($revisions->isEmpty()): ?>
+        <tr>
+            <td colspan="4"><p class="no-data"><?= e(trans('inetis.revisionable::lang.list.no_records')) ?></p></td>
+        </tr>
+        <?php endif; ?>
+        <?php foreach ($revisions as $revisionsGroup) : ?>
+        <?php foreach ($revisionsGroup as $key => $revision) : ?>
+        <tr>
+            <?php if ($key === 0) : ?>
+            <td><?= $revision->created_at->setTimezone($timezone)->format('d.m.Y H:i'); ?></td>
+            <?php else: ?>
+            <td></td>
+            <?php endif; ?>
+            <td><?= $translateField($revision->field); ?></td>
+            <td><?= $revision->old_value; ?></td>
+            <td><?= $revision->new_value; ?></td>
+            <td><?= $revision->user->full_name ?? $revision->user->name ?? ''; ?></td>
+        </tr>
+        <?php endforeach; ?>
+        <?php endforeach; ?>
+    </table>
+</div>
