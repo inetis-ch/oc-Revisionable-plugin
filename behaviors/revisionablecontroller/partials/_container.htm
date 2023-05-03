@@ -1,6 +1,6 @@
 <?php Block::put('breadcrumb') ?>
 <ul>
-    <li><a href="<?= $url['list']; ?>"><?= $modelName ?></a></li>
+    <li><a href="<?= $url['list']; ?>"><?= e($modelName) ?></a></li>
     <li><?= e($this->pageTitle) ?></li>
 </ul>
 <?php Block::endPut() ?>
@@ -39,10 +39,10 @@
             <?php else: ?>
             <td></td>
             <?php endif; ?>
-            <td><?= $translateField($revision->field); ?></td>
-            <td><?= $revision->old_value; ?></td>
-            <td><?= $revision->new_value; ?></td>
-            <td><?= $revision->user->full_name ?? $revision->user->name ?? ''; ?></td>
+            <td><?= e($translateField($revision->field)) ?></td>
+            <td><?= e($revision->old_value) ?></td>
+            <td><?= e($revision->new_value) ?></td>
+            <td><?= e($revision->user->full_name ?? $revision->user->name ?? '') ?></td>
         </tr>
         <?php endforeach; ?>
         <?php endforeach; ?>
